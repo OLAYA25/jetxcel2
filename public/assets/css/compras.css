@@ -1,0 +1,203 @@
+/* 
+ * JETXCEL - Compras (Purchases) Page Styles
+ * Contains styles specific to the purchases module
+ */
+
+/* Purchase Form Styles */
+.purchase-form {
+    background: white;
+    border: 1px solid var(--card-border);
+    border-radius: var(--border-radius);
+    padding: 25px;
+    box-shadow: var(--box-shadow);
+}
+
+/* Supplier Selection */
+.supplier-section {
+    background-color: #f0f9ff;
+    border: 1px solid #bae6fd;
+    border-radius: var(--border-radius);
+    padding: 20px;
+    margin-bottom: 25px;
+}
+
+.supplier-info {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin-top: 15px;
+}
+
+/* Purchase Items Table */
+.purchase-items {
+    margin: 25px 0;
+}
+
+.purchase-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--box-shadow);
+}
+
+.purchase-table th {
+    background-color: #f8fafc;
+    padding: 15px;
+    text-align: left;
+    font-weight: 600;
+    color: #374151;
+    border-bottom: 2px solid var(--card-border);
+}
+
+.purchase-table td {
+    padding: 12px 15px;
+    border-bottom: 1px solid var(--card-border);
+}
+
+.purchase-table tr:hover {
+    background-color: #f9fafb;
+}
+
+/* Add Item Form */
+.add-item-form {
+    background-color: #f8fafc;
+    border: 1px dashed var(--card-border);
+    border-radius: var(--border-radius);
+    padding: 20px;
+    margin-top: 15px;
+}
+
+.item-form-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr auto;
+    gap: 15px;
+    align-items: end;
+}
+
+/* Purchase Totals */
+.purchase-totals {
+    background-color: #f8fafc;
+    border: 1px solid var(--card-border);
+    border-radius: var(--border-radius);
+    padding: 20px;
+    margin-top: 25px;
+}
+
+.total-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.total-row:last-child {
+    border-bottom: none;
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin-top: 10px;
+    padding-top: 15px;
+    border-top: 2px solid var(--card-border);
+}
+
+/* IVA Calculator */
+.iva-section {
+    background-color: #fef3c7;
+    border: 1px solid #fbbf24;
+    border-radius: var(--border-radius);
+    padding: 15px;
+    margin: 15px 0;
+}
+
+.iva-controls {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.iva-rate-selector {
+    display: flex;
+    gap: 10px;
+}
+
+.iva-rate {
+    padding: 8px 15px;
+    border: 1px solid var(--card-border);
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: white;
+}
+
+.iva-rate.active {
+    background-color: var(--warning-color);
+    color: white;
+    border-color: var(--warning-color);
+}
+
+/* Purchase Actions */
+.purchase-actions {
+    display: flex;
+    gap: 15px;
+    justify-content: flex-end;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid var(--card-border);
+}
+
+.btn-save-purchase {
+    background-color: var(--success-color);
+    border-color: var(--success-color);
+    padding: 12px 25px;
+    font-weight: 600;
+}
+
+.btn-save-purchase:hover {
+    background-color: #16a34a;
+    border-color: #16a34a;
+}
+
+/* Item Actions */
+.item-actions {
+    display: flex;
+    gap: 5px;
+}
+
+.btn-remove-item {
+    background-color: var(--danger-color);
+    border-color: var(--danger-color);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 0.875rem;
+}
+
+.btn-remove-item:hover {
+    background-color: #dc2626;
+    border-color: #dc2626;
+}
+
+/* Responsive Design for Purchases */
+@media (max-width: 768px) {
+    .item-form-row {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+    
+    .purchase-table {
+        font-size: 0.875rem;
+    }
+    
+    .purchase-table th,
+    .purchase-table td {
+        padding: 8px;
+    }
+    
+    .iva-controls {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}

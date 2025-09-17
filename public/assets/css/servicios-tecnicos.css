@@ -1,0 +1,295 @@
+/* 
+ * JETXCEL - Servicios Técnicos (Technical Services) Page Styles
+ * Contains styles specific to the technical services module
+ */
+
+/* Services Grid Layout */
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.service-card {
+    background: white;
+    border: 1px solid var(--card-border);
+    border-radius: var(--border-radius);
+    padding: 20px;
+    box-shadow: var(--box-shadow);
+    position: relative;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.service-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* Service Header */
+.service-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 15px;
+}
+
+.service-title {
+    font-weight: 600;
+    color: #1e293b;
+    margin: 0;
+}
+
+.service-id {
+    font-size: 0.875rem;
+    color: #64748b;
+    background-color: #f1f5f9;
+    padding: 2px 8px;
+    border-radius: 12px;
+}
+
+/* Service Details */
+.service-details {
+    margin: 15px 0;
+}
+
+.service-detail {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+}
+
+.service-label {
+    color: #64748b;
+    font-weight: 500;
+}
+
+.service-value {
+    color: #1e293b;
+    font-weight: 600;
+}
+
+/* Service Description */
+.service-description {
+    background-color: #f8fafc;
+    border-left: 4px solid var(--primary-color);
+    padding: 12px;
+    margin: 15px 0;
+    border-radius: 0 4px 4px 0;
+    font-size: 0.9rem;
+    color: #374151;
+}
+
+/* Service Status Badges */
+.service-status-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.status-pendiente {
+    background-color: #fef3c7;
+    color: #92400e;
+}
+
+.status-en-proceso {
+    background-color: #dbeafe;
+    color: #1e40af;
+}
+
+.status-completado {
+    background-color: #d1fae5;
+    color: #065f46;
+}
+
+.status-retrasado {
+    background-color: #fee2e2;
+    color: #991b1b;
+}
+
+/* Service Actions */
+.service-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid var(--card-border);
+}
+
+.btn-service-action {
+    flex: 1;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    border: 1px solid;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: center;
+}
+
+.btn-edit-service {
+    background-color: white;
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.btn-edit-service:hover {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.btn-delete-service {
+    background-color: white;
+    color: var(--danger-color);
+    border-color: var(--danger-color);
+}
+
+.btn-delete-service:hover {
+    background-color: var(--danger-color);
+    color: white;
+}
+
+/* Service Form */
+.service-form {
+    background: white;
+    border-radius: var(--border-radius);
+    padding: 25px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+    color: #374151;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--card-border);
+    border-radius: 6px;
+    font-size: 0.9rem;
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+/* Service Statistics */
+.services-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.stat-card {
+    background: white;
+    border: 1px solid var(--card-border);
+    border-radius: var(--border-radius);
+    padding: 20px;
+    text-align: center;
+    box-shadow: var(--box-shadow);
+}
+
+.stat-number {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--primary-color);
+    display: block;
+}
+
+.stat-label {
+    color: #64748b;
+    font-size: 0.9rem;
+    margin-top: 5px;
+}
+
+/* Filter Section */
+.services-filters {
+    background: white;
+    border: 1px solid var(--card-border);
+    border-radius: var(--border-radius);
+    padding: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.filter-group label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #374151;
+}
+
+.filter-select {
+    padding: 8px 12px;
+    border: 1px solid var(--card-border);
+    border-radius: 6px;
+    font-size: 0.9rem;
+    min-width: 150px;
+}
+
+/* Empty State */
+.services-empty {
+    text-align: center;
+    padding: 60px 20px;
+    color: #64748b;
+}
+
+.services-empty i {
+    font-size: 3rem;
+    margin-bottom: 15px;
+    color: #cbd5e1;
+}
+
+.services-empty h3 {
+    margin-bottom: 10px;
+    color: #374151;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .services-grid {
+        grid-template-columns: 1fr;
+        padding: 15px;
+    }
+    
+    .services-filters {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .filter-group {
+        width: 100%;
+    }
+    
+    .service-actions {
+        flex-direction: column;
+    }
+    
+    .services-stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}

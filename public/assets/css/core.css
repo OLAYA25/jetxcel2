@@ -1,0 +1,132 @@
+/* 
+ * JETXCEL - Core CSS Variables and Base Styles
+ * Contains CSS custom properties, base typography, and global styles
+ */
+
+:root {
+    /* Color Palette */
+    --primary-color: #2563eb;
+    --secondary-color: #64748b;
+    --success-color: #22c55e;
+    --warning-color: #f59e0b;
+    --danger-color: #ef4444;
+    --info-color: #3b82f6;
+    
+    /* Background Colors */
+    --body-bg: #f8fafc;
+    --card-bg: white;
+    --sidebar-bg: #1e293b;
+    --light-bg: #f1f5f9;
+    
+    /* Border and Shadow */
+    --card-border: #e2e8f0;
+    --border-radius: 8px;
+    --box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    
+    /* Layout */
+    --sidebar-width: 250px;
+    --container-padding: 1rem;
+    
+    /* Status Tags */
+    --tag-red: #ef4444;
+    --tag-blue: #3b82f6;
+    --tag-orange: #f97316;
+    --tag-purple: #6366f1;
+    --tag-gray: #6b7280;
+    --tag-green: #22c55e;
+}
+
+/* Base Styles */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body { 
+    background-color: var(--body-bg); 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Page Layout Structure */
+.page-wrapper {
+    display: flex;
+    min-height: 100vh;
+}
+
+.content-wrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+footer {
+    margin-top: auto;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 10;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+    color: #1e293b;
+    font-weight: 600;
+}
+
+/* Links */
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Buttons */
+.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.btn-primary:hover {
+    background-color: #1d4ed8;
+    border-color: #1d4ed8;
+}
+
+/* Cards */
+.card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+}
+
+.card-title {
+    font-weight: 600;
+    color: #1e293b;
+    font-size: 1.1rem;
+}
+
+/* Utility Classes */
+.text-muted {
+    color: var(--secondary-color) !important;
+}
+
+.bg-light {
+    background-color: var(--light-bg) !important;
+}
+
+/* Form Controls */
+.form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(37, 99, 235, 0.25);
+}
+
+.form-select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(37, 99, 235, 0.25);
+}

@@ -1,0 +1,280 @@
+/* 
+ * JETXCEL - Ventas (Sales) Page Styles
+ * Contains styles specific to the sales module
+ */
+
+/* Sales Container Layout */
+.sale-container {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+    max-width: 1600px;
+    margin: 0 auto;
+}
+
+.sale-form-container {
+    width: 400px;
+    background: white;
+    padding: 20px;
+    border-radius: var(--border-radius);
+    height: fit-content;
+    position: sticky;
+    top: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    border: 1px solid var(--card-border);
+}
+
+.sale-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.sale-item {
+    border-bottom: 1px solid #eee;
+    padding: 12px 0;
+}
+
+.sale-item:last-child {
+    border-bottom: none;
+}
+
+/* Product Selection Styles */
+.product-selection {
+    margin-bottom: 20px;
+}
+
+.selected-products {
+    max-height: 400px;
+    overflow-y: auto;
+    border: 1px solid var(--card-border);
+    border-radius: var(--border-radius);
+    padding: 15px;
+    background-color: #f8fafc;
+}
+
+/* Cart Item Styles */
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background: white;
+    border-radius: 6px;
+    margin-bottom: 10px;
+    border: 1px solid var(--card-border);
+}
+
+.cart-item-info {
+    flex: 1;
+}
+
+.cart-item-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.quantity-controls {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.quantity-btn {
+    width: 30px;
+    height: 30px;
+    border: 1px solid var(--card-border);
+    background: white;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.quantity-btn:hover {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.quantity-input {
+    width: 60px;
+    text-align: center;
+    border: 1px solid var(--card-border);
+    border-radius: 4px;
+    padding: 5px;
+}
+
+/* Form Section Titles */
+.form-section-title {
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: var(--secondary-color);
+    font-size: 1.1rem;
+}
+
+.calculation-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    padding: 5px 0;
+}
+
+.calculation-row.total {
+    font-weight: 700;
+    font-size: 1.2rem;
+    border-top: 2px solid #e2e8f0;
+    padding-top: 15px;
+    margin-top: 10px;
+    color: var(--secondary-color);
+}
+
+.change-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--light-bg);
+    padding: 12px 15px;
+    border-radius: 8px;
+    margin-top: 10px;
+}
+
+.change-label {
+    font-weight: 600;
+}
+
+.change-amount {
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.action-buttons {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+/* Sales Summary */
+.sale-summary {
+    background-color: #f8fafc;
+    padding: 20px;
+    border-radius: var(--border-radius);
+    margin-top: 20px;
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.summary-row.total {
+    font-weight: bold;
+    font-size: 1.2rem;
+    border-top: 2px solid var(--card-border);
+    padding-top: 10px;
+    margin-top: 15px;
+}
+
+/* Payment Methods */
+.payment-methods {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.payment-method {
+    padding: 15px;
+    border: 2px solid var(--card-border);
+    border-radius: var(--border-radius);
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.payment-method:hover,
+.payment-method.selected {
+    border-color: var(--primary-color);
+    background-color: rgba(37, 99, 235, 0.1);
+}
+
+/* Discount Section */
+.discount-section {
+    background-color: #fff7ed;
+    border: 1px solid #fed7aa;
+    border-radius: var(--border-radius);
+    padding: 15px;
+    margin: 15px 0;
+}
+
+.discount-container {
+    display: flex;
+    gap: 10px;
+    margin: 15px 0;
+}
+
+.discount-input {
+    flex: 2;
+}
+
+.apply-discount-btn {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.discount-type-selector {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.discount-type {
+    padding: 5px 15px;
+    border: 1px solid var(--card-border);
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.discount-type.active {
+    background-color: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+/* Client Selection */
+.client-selector {
+    margin-bottom: 20px;
+}
+
+.client-info {
+    background-color: #f0f9ff;
+    border: 1px solid #bae6fd;
+    border-radius: var(--border-radius);
+    padding: 15px;
+    margin-top: 10px;
+}
+
+/* Action Buttons */
+.sale-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
+
+.btn-complete-sale {
+    background-color: var(--success-color);
+    border-color: var(--success-color);
+    padding: 12px 30px;
+    font-weight: 600;
+}
+
+.btn-complete-sale:hover {
+    background-color: #16a34a;
+    border-color: #16a34a;
+}

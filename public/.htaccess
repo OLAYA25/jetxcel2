@@ -1,0 +1,13 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /jetxcel2/public/
+    
+    # Redirect to public directory if not already there
+    RewriteCond %{REQUEST_URI} !^/jetxcel2/public/
+    RewriteRule ^(.*)$ /jetxcel2/public/$1 [L,R=301]
+    
+    # Route all requests through index.php
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
+</IfModule>

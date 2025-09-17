@@ -1,0 +1,311 @@
+/* 
+ * JETXCEL - Layout CSS
+ * Contains layout styles, responsive design, and main structural elements
+ */
+
+/* Sidebar Styles */
+.sidebar {
+    width: var(--sidebar-width);
+    background-color: var(--sidebar-bg);
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 1000;
+    padding-top: 1rem;
+    overflow-y: auto;
+    transition: transform 0.3s, width 0.3s;
+}
+
+.sidebar.collapsed {
+    width: 64px;
+}
+
+.sidebar.collapsed .sidebar-text {
+    display: none;
+}
+
+.sidebar-icon {
+    color: #64748b;
+    padding: 0.75rem 1rem;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: color 0.2s, background-color 0.2s;
+    border-left: 3px solid transparent;
+    text-decoration: none;
+}
+
+.sidebar-icon:hover, .sidebar-icon.active { 
+    color: white; 
+    background-color: #2d3748;
+    border-left-color: var(--primary-color);
+}
+
+.sidebar-icon i {
+    margin-right: 12px;
+    font-size: 1.2rem;
+    min-width: 24px;
+    text-align: center;
+}
+
+.sidebar-text {
+    transition: opacity 0.3s;
+}
+
+/* Main Content Layout */
+.main-content {
+    margin-left: var(--sidebar-width);
+    padding: 1rem;
+    transition: margin-left 0.3s;
+    min-height: calc(100vh - 80px);
+    padding-bottom: 80px;
+}
+
+.main-content.sidebar-collapsed {
+    margin-left: 64px;
+}
+
+/* Header Styles */
+.header {
+    background-color: white;
+    padding: 1rem;
+    border-bottom: 1px solid var(--card-border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+}
+
+.company-title {
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: #1a2233;
+    margin-right: 1rem;
+}
+
+.search-bar {
+    max-width: 600px;
+    border-radius: 8px;
+}
+
+/* Tabs Container */
+.tabs-container {
+    background-color: white;
+    padding: 1rem;
+    border-bottom: 1px solid var(--card-border);
+    margin-bottom: 1rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+}
+
+.tab {
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-right: 0.5rem;
+    transition: background-color 0.2s;
+}
+
+.tab.active { 
+    background-color: #f1f5f9; 
+}
+
+.tab .number {
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.875rem;
+    color: white;
+}
+
+.tab:nth-child(1) .number { background-color: var(--tag-red); }
+.tab:nth-child(2) .number { background-color: var(--tag-red); }
+.tab:nth-child(3) .number { background-color: var(--tag-purple); }
+.tab:nth-child(4) .number { background-color: var(--tag-orange); }
+.tab:nth-child(5) .number { background-color: var(--tag-purple); }
+.tab:nth-child(6) .number { background-color: var(--tag-gray); }
+.tab:nth-child(7) .number { background-color: var(--tag-red); }
+
+/* Toggle Sidebar Button */
+.toggle-sidebar-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    z-index: 1100;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 8px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* Progress Bars */
+.progress-container {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.progress-bar {
+    height: 4px;
+    border-radius: 2px;
+    flex-grow: 1;
+}
+
+.progress-blue {
+    background-color: #3b82f6;
+}
+
+/* Right Sidebar */
+.right-sidebar {
+    background: white;
+    border-left: 1px solid var(--card-border);
+    padding: 1rem;
+    height: 100vh;
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 300px;
+    transition: transform 0.3s ease;
+    z-index: 999;
+}
+
+.right-sidebar.hidden {
+    transform: translateX(100%);
+}
+
+/* Mobile Sidebar Toggle */
+.toggle-sidebar {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 1060;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+    .sidebar {
+        transform: translateX(-100%);
+        z-index: 1050;
+    }
+    
+    .sidebar.show {
+        transform: translateX(0);
+    }
+    
+    .main-content {
+        margin-left: 0;
+    }
+    
+    .toggle-sidebar {
+        display: flex !important;
+    }
+    
+    .sidebar.show ~ .toggle-sidebar {
+        left: calc(var(--sidebar-width) - 25px);
+    }
+}
+
+@media (max-width: 1200px) {
+    .sale-container {
+        flex-direction: column;
+    }
+    
+    .sale-form-container {
+        width: 100%;
+        position: relative;
+        margin-top: 30px;
+    }
+}
+
+@media (max-width: 768px) {
+    .product-grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
+    
+    .discount-container {
+        flex-direction: column;
+    }
+    
+    .product-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+    
+    .toggle-sidebar {
+        display: flex;
+    }
+    
+    .sidebar {
+        width: 64px;
+    }
+    
+    .sidebar .sidebar-text {
+        display: none;
+    }
+}
+
+/* Pagination */
+.pagination-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+/* Filter Container */
+.filter-container {
+    padding: 1rem;
+    background-color: white;
+    border-bottom: 1px solid var(--card-border);
+}
+
+/* No Services Message */
+.no-services {
+    padding: 2rem;
+    text-align: center;
+    color: #6b7280;
+}
+
+/* Footer Styles */
+footer {
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    z-index: 10;
+    margin-top: auto;
+}
+
+/* Purchase Layout - Two Column */
+.purchase-container {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+}
+
+.purchase-content {
+    flex: 2;
+}
+
+.purchase-sidebar {
+    flex: 1;
+    position: sticky;
+    top: 2rem;
+}
