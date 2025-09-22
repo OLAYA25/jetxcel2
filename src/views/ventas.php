@@ -158,11 +158,17 @@ $ventasRecientes = $ventaModel->getRecentSales(5);
             <div class="sale-history mt-4">
                 <div class="sale-history-title">Historial de Ventas Recientes</div>
                 <div id="recentSales">
-                    <?php if (empty($ventasRecientes)): ?>
+                    <?php 
+                    // Depuración temporal
+                    echo '<!-- ';
+                    var_dump($ventasRecientes);
+                    echo ' -->';
+                    
+                    if (empty($ventasRecientes)): ?>
                         <div class="alert alert-info">No hay ventas recientes para mostrar.</div>
                     <?php else: ?>
                         <?php foreach ($ventasRecientes as $venta): 
-                            $fechaVenta = new DateTime($venta['fecha_venta']);
+                            $fechaVenta = new DateTime($venta['fecha_factura']);
                         ?>
                             <div class="sale-item">
                                 <div class="d-flex justify-content-between">

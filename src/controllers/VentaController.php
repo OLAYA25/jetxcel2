@@ -37,7 +37,7 @@ class VentaController
             $totalPages = ceil($totalProducts / $perPage);
 
             // Get recent sales
-            $recentSales = $this->ventaModel->getRecentSales(5);
+            $ventasRecientes = $this->ventaModel->getRecentSales(5);
 
             // Get categories for filter
             $categorias = $this->productoModel->getCategories();
