@@ -1,4 +1,4 @@
-<?php 
+<?php
 // Incluir archivos necesarios
 require_once __DIR__ . '/../../config/config.php';
 require_once __DIR__ . '/../models/Producto.php';
@@ -85,7 +85,7 @@ $ventasRecientes = $ventaModel->getRecentSales(5);
                     </form>
                 </div>
             </div>
-            
+
             <div id="mensajeError" class="alert alert-danger" style="display:none;"></div>
             <div id="mensajeSuccess" class="alert alert-success" style="display:none;"></div>
 
@@ -95,9 +95,10 @@ $ventasRecientes = $ventaModel->getRecentSales(5);
                         <div class="alert alert-info">No se encontraron productos.</div>
                     </div>
                 <?php else: ?>
-                    <?php foreach ($productos as $producto): 
-                        $imagen = !empty($producto['imagen']) ? 
-                            'uploads/productos/' . basename($producto['imagen']) : 
+                    <?php foreach ($productos as $producto):
+                        // Cambia la ruta base para las imágenes de productos
+                        $imagen = !empty($producto['imagen']) ?
+                            '/jetxcel2/public/uploads/productos/' . basename($producto['imagen']) :
                             'assets/images/placeholder-product.png';
                         $claseStock = $producto['stock'] <= $producto['stock_minimo'] ? 'bg-warning' : 'bg-success';
                         $textoStock = $producto['stock'] <= $producto['stock_minimo'] ? 'Poco stock' : 'En stock';
@@ -118,20 +119,20 @@ $ventasRecientes = $ventaModel->getRecentSales(5);
                                 <p class="card-price">$<?php echo number_format($producto['precio_venta_sin_iva'], 2); ?></p>
                                 <p class="card-stock">Disponible: <?php echo $producto['stock']; ?> unidades</p>
                             </div>
-                            <button class="btn btn-sm btn-outline-primary add-to-cart-btn" 
-                                    data-producto-id="<?php echo $producto['id']; ?>"
-                                    data-producto-nombre="<?php echo htmlspecialchars($producto['nombre']); ?>"
-                                    data-producto-precio="<?php echo $producto['precio_venta_sin_iva']; ?>"
-                                    data-producto-stock="<?php echo $producto['stock']; ?>"
-                                    data-producto-impuesto="<?php echo $producto['impuesto_venta_porcentaje']; ?>"
-                                    data-producto-impuesto-id="<?php echo $producto['impuesto_id']; ?>">
+                            <button class="btn btn-sm btn-outline-primary add-to-cart-btn"
+                                data-producto-id="<?php echo $producto['id']; ?>"
+                                data-producto-nombre="<?php echo htmlspecialchars($producto['nombre']); ?>"
+                                data-producto-precio="<?php echo $producto['precio_venta_sin_iva']; ?>"
+                                data-producto-stock="<?php echo $producto['stock']; ?>"
+                                data-producto-impuesto="<?php echo $producto['impuesto_venta_porcentaje']; ?>"
+                                data-producto-impuesto-id="<?php echo $producto['impuesto_id']; ?>">
                                 <i class="bi bi-cart-plus"></i> Agregar
                             </button>
                         </div>
                     <?php endforeach; ?>
                 <?php endif; ?>
             </div>
-                    
+
             <!-- Paginación -->
             <?php if ($totalPaginas > 1 && empty($busqueda) && !$categoriaId): ?>
                 <div class="pagination-container mt-4">
@@ -140,13 +141,13 @@ $ventasRecientes = $ventaModel->getRecentSales(5);
                             <li class="page-item <?php echo ($pagina <= 1) ? 'disabled' : ''; ?>">
                                 <a class="page-link" href="?pagina=<?php echo $pagina - 1; ?>&por_pagina=<?php echo $porPagina; ?>">Anterior</a>
                             </li>
-                            
+
                             <?php for ($i = 1; $i <= $totalPaginas; $i++): ?>
                                 <li class="page-item <?php echo ($i == $pagina) ? 'active' : ''; ?>">
                                     <a class="page-link" href="?pagina=<?php echo $i; ?>&por_pagina=<?php echo $porPagina; ?>"><?php echo $i; ?></a>
                                 </li>
                             <?php endfor; ?>
-                            
+
                             <li class="page-item <?php echo ($pagina >= $totalPaginas) ? 'disabled' : ''; ?>">
                                 <a class="page-link" href="?pagina=<?php echo $pagina + 1; ?>&por_pagina=<?php echo $porPagina; ?>">Siguiente</a>
                             </li>
@@ -154,15 +155,21 @@ $ventasRecientes = $ventaModel->getRecentSales(5);
                     </nav>
                 </div>
             <?php endif; ?>
-            
+
             <div class="sale-history mt-4">
                 <div class="sale-history-title">Historial de Ventas Recientes</div>
                 <div id="recentSales">
-                    <?php if (empty($ventasRecientes)): ?>
+                    <?php
+                    // Depuración temporal
+                    echo '<!-- ';
+                    var_dump($ventasRecientes);
+                    echo ' -->';
+
+                    if (empty($ventasRecientes)): ?>
                         <div class="alert alert-info">No hay ventas recientes para mostrar.</div>
                     <?php else: ?>
-                        <?php foreach ($ventasRecientes as $venta): 
-                            $fechaVenta = new DateTime($venta['fecha_venta']);
+                        <?php foreach ($ventasRecientes as $venta):
+                            $fechaVenta = new DateTime($venta['fecha_factura']);
                         ?>
                             <div class="sale-item">
                                 <div class="d-flex justify-content-between">
@@ -170,7 +177,7 @@ $ventasRecientes = $ventaModel->getRecentSales(5);
                                     <span class="text-success">$<?php echo number_format($venta['total'], 2); ?></span>
                                 </div>
                                 <div class="text-muted">
-                                    Cliente: <?php echo htmlspecialchars($venta['cliente_nombre']); ?> • 
+                                    Cliente: <?php echo htmlspecialchars($venta['cliente_nombre']); ?> •
                                     <?php echo $fechaVenta->format('d M Y, H:i'); ?>
                                 </div>
                             </div>
@@ -178,15 +185,15 @@ $ventasRecientes = $ventaModel->getRecentSales(5);
                     <?php endif; ?>
                 </div>
             </div>
-                </div> <!-- Cierre correcto de sale-content -->
+        </div> <!-- Cierre correcto de sale-content -->
 
-                <div class="sale-form-container">
+        <div class="sale-form-container">
             <div class="form-section">
                 <div class="form-section-title">Productos Seleccionados</div>
                 <div id="selectedProducts">
                     <div class="alert alert-info">Seleccione productos para la venta</div>
                 </div>
-                
+
                 <!-- Plantilla para productos seleccionados (oculta) -->
                 <div id="selectedProductTemplate" class="d-none">
                     <div class="selected-product" data-product-id="">
@@ -217,19 +224,19 @@ $ventasRecientes = $ventaModel->getRecentSales(5);
                     </div>
                 </div>
             </div>
-                    
+
             <div class="form-section">
                 <div class="form-section-title">Resumen de Venta</div>
                 <div class="calculation-row">
                     <span>Subtotal:</span>
                     <span id="subtotalAmount">$0.00</span>
                 </div>
-                
+
                 <div class="calculation-row">
                     <span>IVA (19%):</span>
                     <span id="taxAmount">$0.00</span>
                 </div>
-                
+
                 <div class="discount-container">
                     <div class="discount-input">
                         <label class="form-label">Descuento ($)</label>
@@ -240,21 +247,21 @@ $ventasRecientes = $ventaModel->getRecentSales(5);
                         <button type="button" class="btn btn-outline-primary w-100" id="applyDiscountBtn">Aplicar</button>
                     </div>
                 </div>
-                
+
                 <div class="calculation-row">
                     <span>Descuento aplicado:</span>
                     <span id="discountAmount">$0.00</span>
                 </div>
-                
+
                 <div class="calculation-row total">
                     <span>Total a Pagar:</span>
                     <span id="totalAmount">$0.00</span>
                 </div>
-                
+
                 <input type="hidden" id="totalSinDescuento" value="0">
                 <input type="hidden" id="totalConIva" value="0">
             </div>
-                    
+
             <div class="form-section">
                 <div class="form-section-title">Información del Cliente</div>
                 <div class="mb-3">
@@ -281,7 +288,7 @@ $ventasRecientes = $ventaModel->getRecentSales(5);
                         <i class="bi bi-person-badge"></i> Ver información del cliente
                     </button>
                 </div>
-                
+
                 <div id="clientInfo" class="d-none">
                     <div class="card bg-light p-2 mt-2">
                         <div class="d-flex justify-content-between">
@@ -293,7 +300,7 @@ $ventasRecientes = $ventaModel->getRecentSales(5);
                     </div>
                 </div>
             </div>
-                    
+
             <div class="form-section">
                 <div class="form-section-title">Pago</div>
                 <div class="mb-3">
@@ -307,16 +314,16 @@ $ventasRecientes = $ventaModel->getRecentSales(5);
                         <option value="Cuenta por pagar">Cuenta por pagar</option>
                     </select>
                 </div>
-                
+
                 <div class="mb-3">
                     <label class="form-label">Valor Recibido ($) <span class="text-danger">*</span></label>
                     <div class="input-group">
                         <span class="input-group-text">$</span>
-                        <input type="number" class="form-control" id="amountReceived" 
-                               placeholder="Ingrese el valor recibido" min="0" step="0.01" required>
+                        <input type="number" class="form-control" id="amountReceived"
+                            placeholder="Ingrese el valor recibido" min="0" step="0.01" required>
                     </div>
                 </div>
-                
+
                 <div class="mb-3">
                     <label class="form-label">Cambio</label>
                     <div class="input-group">
@@ -324,30 +331,30 @@ $ventasRecientes = $ventaModel->getRecentSales(5);
                         <input type="text" class="form-control" id="changeAmount" value="0.00" readonly>
                     </div>
                 </div>
-                        
-                        <div class="change-container">
-                            <div class="change-label">Cambio:</div>
-                            <div class="change-amount" id="changeAmount">$0.00</div>
-                        </div>
-                    </div>
-                    
-                    <div class="form-section">
-                        <div class="form-section-title">Observaciones</div>
-                        <textarea class="form-control" id="saleNotes" rows="2" placeholder="Notas adicionales sobre la venta..."></textarea>
-                    </div>
-                    
-                    <div class="action-buttons">
-                        <button class="btn btn-light flex-grow-1" id="cancelSaleBtn">
-                            <i class="bi bi-x-circle"></i> Cancelar
-                        </button>
-                        <button class="btn btn-primary flex-grow-1" id="completeSaleBtn">
-                            <i class="bi bi-check-circle"></i> Completar Venta
-                        </button>
-                    </div>
+
+                <div class="change-container">
+                    <div class="change-label">Cambio:</div>
+                    <div class="change-amount" id="changeAmount">$0.00</div>
                 </div>
-            </div> <!-- Cierre de sale-form-container -->
-        </div> <!-- Cierre de sale-container -->
-    </div> <!-- Cierre de container-fluid -->
+            </div>
+
+            <div class="form-section">
+                <div class="form-section-title">Observaciones</div>
+                <textarea class="form-control" id="saleNotes" rows="2" placeholder="Notas adicionales sobre la venta..."></textarea>
+            </div>
+
+            <div class="action-buttons">
+                <button class="btn btn-light flex-grow-1" id="cancelSaleBtn">
+                    <i class="bi bi-x-circle"></i> Cancelar
+                </button>
+                <button class="btn btn-primary flex-grow-1" id="completeSaleBtn">
+                    <i class="bi bi-check-circle"></i> Completar Venta
+                </button>
+            </div>
+        </div>
+    </div> <!-- Cierre de sale-form-container -->
+</div> <!-- Cierre de sale-container -->
+</div> <!-- Cierre de container-fluid -->
 </div> <!-- Cierre de main-content -->
 
 <!-- Modal para detalles del producto -->
@@ -365,12 +372,12 @@ $ventasRecientes = $ventaModel->getRecentSales(5);
                     </div>
                     <div class="col-md-6">
                         <h4 id="productDetailName" class="mb-3"></h4>
-                        
+
                         <div class="mb-3">
                             <h5 class="text-primary" id="productDetailPrice"></h5>
                             <span id="productDetailStock" class="badge"></span>
                         </div>
-                        
+
                         <div class="mb-3">
                             <h6>Información del Producto</h6>
                             <table class="table table-sm">
@@ -406,12 +413,12 @@ $ventasRecientes = $ventaModel->getRecentSales(5);
                                 </tbody>
                             </table>
                         </div>
-                        
+
                         <div class="mb-3">
                             <h6>Descripción</h6>
                             <p id="productDetailDescription" class="text-muted"></p>
                         </div>
-                        
+
                         <div class="d-flex gap-2">
                             <button class="btn btn-primary flex-grow-1" id="addToCartFromModal">
                                 <i class="bi bi-cart-plus"></i> Agregar al Carrito
@@ -422,261 +429,261 @@ $ventasRecientes = $ventaModel->getRecentSales(5);
                         </div>
                     </div>
                 </div>
-                    <div class="detail-row">
-                        <div class="detail-label">Nombre:</div>
-                        <div class="detail-value">Laptop HP Pavilion 15</div>
-                    </div>
-                    <div class="detail-row">
-                        <div class="detail-label">Modelo:</div>
-                        <div class="detail-value">15-dw1005la</div>
-                    </div>
-                    <div class="detail-row">
-                        <div class="detail-label">Referencia:</div>
-                        <div class="detail-value">HP-PAV-15-2023</div>
-                    </div>
-                    <div class="detail-row">
-                        <div class="detail-label">Fabricante:</div>
-                        <div class="detail-value">HP Inc.</div>
-                    </div>
-                    <div class="detail-row">
-                        <div class="detail-label">Categoría:</div>
-                        <div class="detail-value">Computadores</div>
-                    </div>
-                    <div class="detail-row">
-                        <div class="detail-label">Procesador:</div>
-                        <div class="detail-value">Intel Core i5-1135G7</div>
-                    </div>
-                    <div class="detail-row">
-                        <div class="detail-label">Memoria RAM:</div>
-                        <div class="detail-value">8GB DDR4</div>
-                    </div>
-                    <div class="detail-row">
-                        <div class="detail-label">Almacenamiento:</div>
-                        <div class="detail-value">512GB SSD</div>
-                    </div>
-                    <div class="detail-row">
-                        <div class="detail-label">Pantalla:</div>
-                        <div class="detail-value">15.6" Full HD</div>
-                    </div>
-                    <div class="detail-row">
-                        <div class="detail-label">Sistema operativo:</div>
-                        <div class="detail-value">Windows 11 Home</div>
-                    </div>
-                    <div class="detail-row">
-                        <div class="detail-label">Garantía:</div>
-                        <div class="detail-value">12 meses</div>
-                    </div>
-                    <div class="detail-row">
-                        <div class="detail-label">Peso:</div>
-                        <div class="detail-value">1.75 kg</div>
-                    </div>
-                    <div class="detail-row">
-                        <div class="detail-label">Dimensiones:</div>
-                        <div class="detail-value">36 x 23.4 x 1.8 cm</div>
-                    </div>
-                    <div class="detail-row">
-                        <div class="detail-label">Color:</div>
-                        <div class="detail-value">Plateado</div>
-                    </div>
-                    <div class="detail-row">
-                        <div class="detail-label">Costo unitario:</div>
-                        <div class="detail-value">$720.00</div>
-                    </div>
-                    <div class="detail-row">
-                        <div class="detail-label">Precio de venta:</div>
-                        <div class="detail-value">$850.00</div>
-                    </div>
-                    <div class="detail-row">
-                        <div class="detail-label">Stock disponible:</div>
-                        <div class="detail-value">12 unidades</div>
-                    </div>
-                    <div class="detail-row">
-                        <div class="detail-label">Ubicación en bodega:</div>
-                        <div class="detail-value">Estante A-12</div>
-                    </div>
-                    <div class="detail-row">
-                        <div class="detail-label">Proveedor:</div>
-                        <div class="detail-value">TecnoImport S.A.S</div>
-                    </div>
-                    <div class="detail-row">
-                        <div class="detail-label">Fecha de ingreso:</div>
-                        <div class="detail-value">15/10/2023</div>
-                    </div>
+                <div class="detail-row">
+                    <div class="detail-label">Nombre:</div>
+                    <div class="detail-value">Laptop HP Pavilion 15</div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-primary" id="addToSaleFromModal">
-                        <i class="bi bi-cart-plus"></i> Agregar a la venta
-                    </button>
+                <div class="detail-row">
+                    <div class="detail-label">Modelo:</div>
+                    <div class="detail-value">15-dw1005la</div>
                 </div>
+                <div class="detail-row">
+                    <div class="detail-label">Referencia:</div>
+                    <div class="detail-value">HP-PAV-15-2023</div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">Fabricante:</div>
+                    <div class="detail-value">HP Inc.</div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">Categoría:</div>
+                    <div class="detail-value">Computadores</div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">Procesador:</div>
+                    <div class="detail-value">Intel Core i5-1135G7</div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">Memoria RAM:</div>
+                    <div class="detail-value">8GB DDR4</div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">Almacenamiento:</div>
+                    <div class="detail-value">512GB SSD</div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">Pantalla:</div>
+                    <div class="detail-value">15.6" Full HD</div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">Sistema operativo:</div>
+                    <div class="detail-value">Windows 11 Home</div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">Garantía:</div>
+                    <div class="detail-value">12 meses</div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">Peso:</div>
+                    <div class="detail-value">1.75 kg</div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">Dimensiones:</div>
+                    <div class="detail-value">36 x 23.4 x 1.8 cm</div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">Color:</div>
+                    <div class="detail-value">Plateado</div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">Costo unitario:</div>
+                    <div class="detail-value">$720.00</div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">Precio de venta:</div>
+                    <div class="detail-value">$850.00</div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">Stock disponible:</div>
+                    <div class="detail-value">12 unidades</div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">Ubicación en bodega:</div>
+                    <div class="detail-value">Estante A-12</div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">Proveedor:</div>
+                    <div class="detail-value">TecnoImport S.A.S</div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">Fecha de ingreso:</div>
+                    <div class="detail-value">15/10/2023</div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" id="addToSaleFromModal">
+                    <i class="bi bi-cart-plus"></i> Agregar a la venta
+                </button>
             </div>
         </div>
     </div>
+</div>
 
-    <!-- Modal para nuevo cliente -->
-    <div class="modal fade" id="newClientModal" tabindex="-1" aria-labelledby="newClientModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header bg-primary text-white">
-                    <h5 class="modal-title" id="newClientModalLabel">Nuevo Cliente</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <form id="newClientForm">
-                    <div class="modal-body">
-                        <div class="mb-3">
-                            <label for="clientNameInput" class="form-label">Nombre Completo <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="clientNameInput" required>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="clientNitInput" class="form-label">NIT/Cédula</label>
-                                    <input type="text" class="form-control" id="clientNitInput">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="clientPhoneInput" class="form-label">Teléfono</label>
-                                    <input type="tel" class="form-control" id="clientPhoneInput">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <label for="clientEmailInput" class="form-label">Correo Electrónico</label>
-                            <input type="email" class="form-control" id="clientEmailInput">
-                        </div>
-                        <div class="row">
-                            <div class="col-md-8">
-                                <div class="mb-3">
-                                    <label for="clientAddressInput" class="form-label">Dirección</label>
-                                    <input type="text" class="form-control" id="clientAddressInput">
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="mb-3">
-                                    <label for="clientCityInput" class="form-label">Ciudad</label>
-                                    <input type="text" class="form-control" id="clientCityInput">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <label for="clientDescriptionInput" class="form-label">Notas</label>
-                            <textarea class="form-control" id="clientDescriptionInput" rows="2"></textarea>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="submit" class="btn btn-primary">Guardar Cliente</button>
-                    </div>
-                </form>
+<!-- Modal para nuevo cliente -->
+<div class="modal fade" id="newClientModal" tabindex="-1" aria-labelledby="newClientModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title" id="newClientModalLabel">Nuevo Cliente</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-        </div>
-    </div>
-
-    <!-- Modal para detalles del cliente -->
-    <div class="modal fade" id="clientDetailsModal" tabindex="-1" aria-labelledby="clientDetailsModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header bg-primary text-white">
-                    <h5 class="modal-title" id="clientDetailsModalLabel">Información del Cliente</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
+            <form id="newClientForm">
                 <div class="modal-body">
-                    <div class="text-center mb-3">
-                        <div class="client-avatar bg-primary bg-opacity-10 p-3 rounded-circle d-inline-flex align-items-center justify-content-center" style="width: 80px; height: 80px;">
-                            <i class="bi bi-person-circle" style="font-size: 2.5rem;"></i>
-                        </div>
-                        <h5 id="clientModalName" class="mt-3 mb-1"></h5>
-                        <p class="text-muted mb-3" id="clientModalNit"></p>
-                        <div class="d-flex justify-content-center gap-2">
-                            <button class="btn btn-sm btn-outline-primary" id="editClientBtn">
-                                <i class="bi bi-pencil"></i> Editar
-                            </button>
-                            <button class="btn btn-sm btn-outline-secondary" id="printClientBtn">
-                                <i class="bi bi-printer"></i> Imprimir
-                            </button>
-                        </div>
+                    <div class="mb-3">
+                        <label for="clientNameInput" class="form-label">Nombre Completo <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" id="clientNameInput" required>
                     </div>
-                    
-                    <div class="client-details">
-                        <div class="detail-item d-flex align-items-center mb-2">
-                            <div class="icon-circle bg-light p-2 me-2">
-                                <i class="bi bi-telephone text-primary"></i>
-                            </div>
-                            <div>
-                                <div class="small text-muted">Teléfono</div>
-                                <div id="clientModalPhone"></div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="clientNitInput" class="form-label">NIT/Cédula</label>
+                                <input type="text" class="form-control" id="clientNitInput">
                             </div>
                         </div>
-                        
-                        <div class="detail-item d-flex align-items-center mb-2">
-                            <div class="icon-circle bg-light p-2 me-2">
-                                <i class="bi bi-envelope text-primary"></i>
-                            </div>
-                            <div>
-                                <div class="small text-muted">Correo Electrónico</div>
-                                <div id="clientModalEmail"></div>
-                            </div>
-                        </div>
-                        
-                        <div class="detail-item d-flex align-items-start mb-2">
-                            <div class="icon-circle bg-light p-2 me-2 mt-1">
-                                <i class="bi bi-geo-alt text-primary"></i>
-                            </div>
-                            <div>
-                                <div class="small text-muted">Dirección</div>
-                                <div id="clientModalAddress"></div>
-                                <div id="clientModalCity"></div>
-                            </div>
-                        </div>
-                        
-                        <div class="detail-item d-flex align-items-start">
-                            <div class="icon-circle bg-light p-2 me-2 mt-1">
-                                <i class="bi bi-card-text text-primary"></i>
-                            </div>
-                            <div>
-                                <div class="small text-muted">Notas</div>
-                                <div id="clientModalNotes" class="text-muted"></div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="clientPhoneInput" class="form-label">Teléfono</label>
+                                <input type="tel" class="form-control" id="clientPhoneInput">
                             </div>
                         </div>
                     </div>
-                    
-                    <div class="client-stats mt-4 pt-3 border-top">
-                        <h6 class="mb-3">Historial de Compras</h6>
-                        <div class="table-responsive">
-                            <table class="table table-sm">
-                                <thead>
-                                    <tr>
-                                        <th>Factura</th>
-                                        <th>Fecha</th>
-                                        <th class="text-end">Total</th>
-                                        <th class="text-center">Acciones</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="clientPurchaseHistory">
-                                    <!-- Las compras se cargarán aquí por AJAX -->
-                                    <tr>
-                                        <td colspan="4" class="text-center">Cargando historial...</td>
-                                    </tr>
-                                </tbody>
-                                <tfoot>
-                                    <tr class="table-light">
-                                        <th colspan="2">Total Gastado:</th>
-                                        <th class="text-end text-success" id="clientTotalSpent">$0.00</th>
-                                        <th></th>
-                                    </tr>
-                                </tfoot>
-                            </table>
+                    <div class="mb-3">
+                        <label for="clientEmailInput" class="form-label">Correo Electrónico</label>
+                        <input type="email" class="form-control" id="clientEmailInput">
+                    </div>
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="mb-3">
+                                <label for="clientAddressInput" class="form-label">Dirección</label>
+                                <input type="text" class="form-control" id="clientAddressInput">
+                            </div>
                         </div>
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label for="clientCityInput" class="form-label">Ciudad</label>
+                                <input type="text" class="form-control" id="clientCityInput">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="clientDescriptionInput" class="form-label">Notas</label>
+                        <textarea class="form-control" id="clientDescriptionInput" rows="2"></textarea>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                        <i class="bi bi-x-lg"></i> Cerrar
-                    </button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Guardar Cliente</button>
                 </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal para detalles del cliente -->
+<div class="modal fade" id="clientDetailsModal" tabindex="-1" aria-labelledby="clientDetailsModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title" id="clientDetailsModalLabel">Información del Cliente</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="text-center mb-3">
+                    <div class="client-avatar bg-primary bg-opacity-10 p-3 rounded-circle d-inline-flex align-items-center justify-content-center" style="width: 80px; height: 80px;">
+                        <i class="bi bi-person-circle" style="font-size: 2.5rem;"></i>
+                    </div>
+                    <h5 id="clientModalName" class="mt-3 mb-1"></h5>
+                    <p class="text-muted mb-3" id="clientModalNit"></p>
+                    <div class="d-flex justify-content-center gap-2">
+                        <button class="btn btn-sm btn-outline-primary" id="editClientBtn">
+                            <i class="bi bi-pencil"></i> Editar
+                        </button>
+                        <button class="btn btn-sm btn-outline-secondary" id="printClientBtn">
+                            <i class="bi bi-printer"></i> Imprimir
+                        </button>
+                    </div>
+                </div>
+
+                <div class="client-details">
+                    <div class="detail-item d-flex align-items-center mb-2">
+                        <div class="icon-circle bg-light p-2 me-2">
+                            <i class="bi bi-telephone text-primary"></i>
+                        </div>
+                        <div>
+                            <div class="small text-muted">Teléfono</div>
+                            <div id="clientModalPhone"></div>
+                        </div>
+                    </div>
+
+                    <div class="detail-item d-flex align-items-center mb-2">
+                        <div class="icon-circle bg-light p-2 me-2">
+                            <i class="bi bi-envelope text-primary"></i>
+                        </div>
+                        <div>
+                            <div class="small text-muted">Correo Electrónico</div>
+                            <div id="clientModalEmail"></div>
+                        </div>
+                    </div>
+
+                    <div class="detail-item d-flex align-items-start mb-2">
+                        <div class="icon-circle bg-light p-2 me-2 mt-1">
+                            <i class="bi bi-geo-alt text-primary"></i>
+                        </div>
+                        <div>
+                            <div class="small text-muted">Dirección</div>
+                            <div id="clientModalAddress"></div>
+                            <div id="clientModalCity"></div>
+                        </div>
+                    </div>
+
+                    <div class="detail-item d-flex align-items-start">
+                        <div class="icon-circle bg-light p-2 me-2 mt-1">
+                            <i class="bi bi-card-text text-primary"></i>
+                        </div>
+                        <div>
+                            <div class="small text-muted">Notas</div>
+                            <div id="clientModalNotes" class="text-muted"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="client-stats mt-4 pt-3 border-top">
+                    <h6 class="mb-3">Historial de Compras</h6>
+                    <div class="table-responsive">
+                        <table class="table table-sm">
+                            <thead>
+                                <tr>
+                                    <th>Factura</th>
+                                    <th>Fecha</th>
+                                    <th class="text-end">Total</th>
+                                    <th class="text-center">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="clientPurchaseHistory">
+                                <!-- Las compras se cargarán aquí por AJAX -->
+                                <tr>
+                                    <td colspan="4" class="text-center">Cargando historial...</td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr class="table-light">
+                                    <th colspan="2">Total Gastado:</th>
+                                    <th class="text-end text-success" id="clientTotalSpent">$0.00</th>
+                                    <th></th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    <i class="bi bi-x-lg"></i> Cerrar
+                </button>
             </div>
         </div>
     </div>
+</div>
 
-    <?php include '../includes/partials/footer.php'; ?>
+<?php include '../includes/partials/footer.php'; ?>
