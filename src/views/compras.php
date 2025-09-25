@@ -153,30 +153,6 @@
                 </div>
             </div>
             
-            <div class="form-section">
-                <div class="form-section-title">Información del Proveedor</div>
-                <div class="mb-3">
-                    <label class="form-label">Proveedor
-                        <span class="info-tooltip" data-bs-toggle="tooltip" title="Seleccione un proveedor para ver sus detalles">
-                            <i class="bi bi-info-circle"></i>
-                        </span>
-                    </label>
-                    <div class="input-group">
-                        <select class="form-select" id="supplierSelect" style="width: 100%">
-                            <option value="">Seleccionar proveedor</option>
-                            <option value="1">TecnoImport S.A.S</option>
-                            <option value="2">Componentes Colombia</option>
-                            <option value="3">Tecnología Global</option>
-                        </select>
-                        <button class="btn btn-outline-primary" type="button" id="newSupplierBtn" data-bs-toggle="modal" data-bs-target="#proveedorModal">
-                            <i class="bi bi-plus-lg"></i>
-                        </button>
-                    </div>
-                    <button class="btn btn-outline-info w-100 supplier-info-btn" id="viewSupplierInfo">
-                        <i class="bi bi-building"></i> Ver información del proveedor
-                    </button>
-                </div>
-            </div>
             
             <div class="form-section">
                 <div class="form-section-title">Documentos</div>

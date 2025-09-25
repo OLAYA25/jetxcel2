@@ -57,7 +57,7 @@ $(document).ready(function() {
     });
     
     // Botón nuevo proveedor
-    $('#btnNuevoProveedor, #newSupplierBtn').click(function() {
+    $('#btnNuevoProveedor').click(function() {
         // El modal se abre automáticamente por data-bs-target
     });
     
@@ -79,26 +79,11 @@ $(document).ready(function() {
         createSupplier();
     });
     
-    // Mostrar información del proveedor
-    $('#viewSupplierInfo').click(function() {
-        const supplierId = $('#supplierSelect').val();
-        if (!supplierId) {
-            showMessage('error', 'Debe seleccionar un proveedor primero');
-            return;
-        }
-        
-        // En una implementación real, aquí se mostraría un modal con la información del proveedor
+    // Función para mostrar información del proveedor (se puede implementar más adelante)
+    function showSupplierInfo(supplierId) {
+        // Implementar lógica para mostrar información del proveedor
         showMessage('info', 'Funcionalidad de información del proveedor en desarrollo');
-    });
-    
-    // Mostrar/ocultar botón de información del proveedor
-    $('#supplierSelect').change(function() {
-        if ($(this).val()) {
-            $('.supplier-info-btn').show();
-        } else {
-            $('.supplier-info-btn').hide();
-        }
-    });
+    }
     
     // Completar compra
     $('#completePurchaseBtn').click(function() {
